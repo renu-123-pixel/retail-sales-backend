@@ -23,9 +23,6 @@ const MONGO_URI = process.env.MONGO_URI;
   "http://127.0.0.1:5173"
 ];; 
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
-});
 
 // Basic middlewares
 app.use(helmet());                 // security headers
@@ -61,7 +58,7 @@ if (process.env.NODE_ENV === "production") {
 // Centralized error handler (must be after routes)
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
-  res.status(err.status || 5000).json({ message: err.message || "Internal Server Error" });
+  res.status(err.status || 500).json({ message: err.message || "Internal Server Error" });
 });
 
 // Connect to MongoDB and start server
